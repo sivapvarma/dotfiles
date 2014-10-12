@@ -28,6 +28,9 @@ Plugin 'tpope/vim-fugutive'
 " Vim support for Julia
 Plugin 'JuliaLang/julia-vim'
 
+" Vim as Python IDE
+Plugin 'klen/python-mode'
+
 " add all plugins before this line
 call vundle#end()
 
