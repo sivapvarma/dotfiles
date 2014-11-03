@@ -1,5 +1,6 @@
 # install vim and gvim
-sudo apt-get install vim vim-gtk
+# sudo apt-get install vim vim-gtk
+# sudo pacman -S gvim
 
 # remove if there is an existing installation
 if [ -e ~/.vim/bundle ]
