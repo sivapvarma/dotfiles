@@ -23,7 +23,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Markdown'
 
 " Git wrapper for vim
-Plugin 'tpope/vim-fugutive'
+Plugin 'tpope/vim-fugitive'
 
 " Vim support for Julia
 Plugin 'JuliaLang/julia-vim'
