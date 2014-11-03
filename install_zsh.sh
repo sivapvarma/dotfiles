@@ -1,5 +1,5 @@
 # install zsh
-sudo apt-get install zsh git
+# sudo apt-get install zsh git
 
 # get oh-my-zsh
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
