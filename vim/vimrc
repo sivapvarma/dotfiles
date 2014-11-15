@@ -37,15 +37,19 @@ call vundle#end()
 filetype plugin indent on
 
 " Solarized colorscheme for Vim
+" solarized everywhere
 syntax enable
 if has('gui_running')
     set background=light
+    colorscheme solarized
 else
-    set background=dark
+    set background=light
+    set t_Co=256
+    let g:solarized_termcolors=256
+    colorscheme solarized
 endif
-colorscheme solarized
 
-" Vim has spellcheck 
+" Vim has spellcheck
 " set spell
 " ]s [s
 " zg zw z= 1z=
