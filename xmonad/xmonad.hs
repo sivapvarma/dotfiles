@@ -9,9 +9,12 @@ main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/spv/.xmonad/xmobar.hs"
     spawn "xrdb -merge $(HOME)/.Xresources"
     xmonad $ defaultConfig
-        { terminal    = "xterm"
+        { terminal    = "xterm"        -- Solarized colorschemed
         , modMask     = mod1Mask       -- left Alt Key
-        , borderWidth = 3
+        , borderWidth = 2
+        , focusedBorderColor = "#00FF00"
+        , normalBorderColor = "#000000"
+        , workspaces = ["term", "vim", "web", "4", "5", "6", "7", "8"]
         , manageHook  = manageDocks <+> manageHook defaultConfig
         , layoutHook  = avoidStruts  $  layoutHook defaultConfig
         , logHook     = dynamicLogWithPP xmobarPP
