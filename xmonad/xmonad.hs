@@ -11,7 +11,7 @@ main = do
     xmonad $ defaultConfig
         { terminal    = "xterm"        -- Solarized colorschemed
         , modMask     = mod1Mask       -- left Alt Key
-        , borderWidth = 2
+        , borderWidth = 1
         , focusedBorderColor = "#00FF00"
         , normalBorderColor = "#000000"
         , workspaces = ["term", "vim", "web", "4", "5", "6", "7", "8"]
