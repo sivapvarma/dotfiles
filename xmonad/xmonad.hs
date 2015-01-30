@@ -42,21 +42,12 @@ main = do
     xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
     spawn "xrdb -merge $(HOME)/.Xresources"
     xmonad $ defaultConfig
-<<<<<<< HEAD
         { terminal    = myTerminal
         , modMask     = myModMask       -- left Alt Key
         , borderWidth = myBorderWidth
         , focusedBorderColor = myFocusedBorderColor
         , normalBorderColor = myNormalBorderColor
         , workspaces = myWorkspaces
-=======
-        { terminal    = "xterm"        -- Solarized colorschemed
-        , modMask     = mod1Mask       -- left Alt Key
-        , borderWidth = 1
-        , focusedBorderColor = "#00FF00"
-        , normalBorderColor = "#000000"
-        , workspaces = ["term", "vim", "web", "4", "5", "6", "7", "8"]
->>>>>>> 3fcb34635473af23c8f2c02df286dcc48cf09792
         , manageHook  = manageDocks <+> manageHook defaultConfig
         , layoutHook  = myLayouts
         , logHook     = dynamicLogWithPP xmobarPP
