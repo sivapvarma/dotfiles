@@ -1,0 +1,19 @@
+" Solarized colorscheme for Vim
+set background=dark
+" colorscheme solarized
+colorscheme industry
+
+" set guifont=Monaco\ 9 "If this does not work google
+" set guifont=Inconsolata\ 13
+set guifont=Source\ Code\ Pro\ 11
+
+" Remove the toolbar
+" this makes it look clean in windows as gvim on windows has bad toolbar
+" icons
+set guioptions-=T   " remove toolbar icons
+set guioptions-=m   " remove menu bar to give a terminal like feel
+set guioptions-=r   " remove right-hand scroll bar
+set guioptions-=L   " remove left-hand scroll bar
+
+" set guioptions-=T   " remove toolbar icons
+" set guioptions-=m   " remove menu bar to give a terminal like feel

@@ -1,53 +1,42 @@
+scriptencoding utf-8
+set encoding=utf-8
 set nocompatible            " disable vi compatibility
-filetype off                " required
+" filetype off                " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-let path='~/.vim/bundle'
-call vundle#begin(path)
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
+" using vim-plug
+call plug#begin('~/.vim/plugged')
 
 " Sensible defaults for vim
-Plugin 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible'
 
 " Python PEP 8 checking - requires flake8
 " pip install flake8
-Plugin 'nvie/vim-flake8'
+Plug 'nvie/vim-flake8'
 
 " Solarized Colorscheme
-Plugin 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 
 " Syntax highlighting
-Plugin 'Markdown'
+Plug 'Markdown'
 
 " Git wrapper for vim
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Vim support for Julia
-Plugin 'JuliaLang/julia-vim'
+Plug 'JuliaLang/julia-vim'
 
-" Vim as Python IDE
-Plugin 'klen/python-mode'
+" insert or delete brackets, parens, quotes
+Plug 'jiangmiao/auto-pairs'
 
 " add all plugins before this line
-call vundle#end()
+call plug#end()
 
 filetype plugin indent on
-
-" Solarized colorscheme for Vim
-" solarized everywhere
 syntax enable
-if has('gui_running')
-    set background=light
-    colorscheme solarized
-else
-    set background=light
-    set t_Co=256
-    let g:solarized_termcolors=256
-    colorscheme solarized
-endif
+
+set background=dark
+" set t_Co=256
+colorscheme industry
 
 " Vim has spellcheck
 " set spell
@@ -57,19 +46,22 @@ endif
 
 " Store the swp and backup files in a sparate directory
 " Dropbox is syncing hidden files also :-)
-set dir=~/.vim/swap,/tmp,.
-set bdir=~/.vim/backup,/tmp,.
+" set dir=~/.vim/swap,/tmp,.
+" set bdir=~/.vim/backup,/tmp,.
+set nobackup
+set nowritebackup
 
 " List chars
 set list
 set listchars=""
 " set listchars=tab:»·
-set listchars=tab:▸\ " TextMate tab character
+set listchars=tab:▸\ 
 set listchars+=trail:·
 set listchars+=extends:>
 set listchars+=precedes:<
 set listchars+=nbsp:·
 set listchars+=eol:¬
+
 
 set backspace=indent,eol,start
 
@@ -84,18 +76,13 @@ set linebreak
 set textwidth=500
 set colorcolumn=80
 
-set autoindent
-set smartindent
+" set autoindent
+" set smartindent
 set wrap            "Wrap Lines
 
 set number          " line numbers on
 set showmatch       " show matching brackets
 
-"set guifont=Monaco\ 10 "If this does not work google
-if has('gui_running')
-    set guifont=Inconsolata\ 14
-    " set guifont=Consolas:h12:cDEFAULT
-endif
 
 set hlsearch        " highlight search
 set ignorecase      " do case insensitive matching
@@ -106,16 +93,6 @@ set incsearch
 abbreviate #i #include
 abbreviate #d #define
 
-" Remove the toolbar
-" this makes it look clean in windows as gvim on windows has bad toolbar
-" icons
-if has('gui_running')
-    set guioptions-=T   " remove toolbar icons
-    set guioptions-=m   " remove menu bar to give a terminal like feel
-endif
-" set guioptions-=T   " remove toolbar icons
-" set guioptions-=m   " remove menu bar to give a terminal like feel
-
 " use <C-b> to paste from system clipboard
 " <C-v> is already used in Vim to trigger Visual Block mode
 map <C-b> "+p
@@ -123,3 +100,9 @@ map <C-b> "+p
 " use <C-c> to copy to system clipboard
 " the text to copy should be selected using visual mode
 map <C-c> "+y
+
+" disable error bell
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+    autocmd GUIEnter * set visualbell t_vb=
+endif
