@@ -10,8 +10,8 @@ Xft.hinting: true
 Xft.hintstyle: hintslight
 Xft.rgba: rgb
 ! Use TrueType font and size by default
-XTerm*faceName: Inconsolata
-XTerm*faceSize: 14
+XTerm*faceName: SourceCodePro
+XTerm*faceSize: 12
 ! urxvt configuration
 ! URxvt.font: 9x15
 ! URxvt.font: xft:bitstream vera sans mono:size=12:antialias=true
