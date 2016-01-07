@@ -157,3 +157,7 @@ bar {
         status_command i3status
         tray_output primary
 }
+
+# lock with Windows+g
+# g for good-bye
+bindsym Mod4+g exec i3lock
