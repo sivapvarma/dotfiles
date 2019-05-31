@@ -2,15 +2,8 @@
 # sudo apt-get install vim vim-gtk
 # sudo pacman -S gvim
 
-# remove if there is an existing installation
-if [ -e ~/.vim/bundle ]
-then
-    rm -rf ~/.vim/bundle
-fi
-
-mkdir -p ~/.vim/bundle
-
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # copy vimrc to homefolder
 cp vimrc ~/.vimrc

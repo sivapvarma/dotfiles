@@ -36,7 +36,9 @@ syntax enable
 
 set background=dark
 " set t_Co=256
-colorscheme industry
+" colorscheme industry
+" colorscheme solarized8
+colorscheme default
 
 " Vim has spellcheck
 " set spell
@@ -55,7 +57,7 @@ set nowritebackup
 set list
 set listchars=""
 " set listchars=tab:»·
-set listchars=tab:▸\ 
+set listchars=tab:▸\
 set listchars+=trail:·
 set listchars+=extends:>
 set listchars+=precedes:<
