@@ -16,9 +16,6 @@ Plug 'nvie/vim-flake8'
 " Solarized Colorscheme
 Plug 'altercation/vim-colors-solarized'
 
-" Syntax highlighting
-Plug 'Markdown'
-
 " Git wrapper for vim
 Plug 'tpope/vim-fugitive'
 
