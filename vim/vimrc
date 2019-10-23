@@ -1,107 +1,180 @@
-scriptencoding utf-8
-set encoding=utf-8
-set nocompatible            " disable vi compatibility
-" filetype off                " required
+" make space the leader key
+    " let mapleader = " "
 
-" using vim-plug
-call plug#begin('~/.vim/plugged')
+" escape is same as  C-[
+" Load vim-plug for plugins.
+    call plug#begin('~/.vim/plugged')
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'tpope/vim-fugitive'
 
-" Sensible defaults for vim
-Plug 'tpope/vim-sensible'
+    " julia
+    Plug 'JuliaEditorSupport/julia-vim'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-sensible'
 
-" Python PEP 8 checking - requires flake8
-" pip install flake8
-Plug 'nvie/vim-flake8'
+    " wakatime
+    Plug 'wakatime/vim-wakatime'
 
-" Solarized Colorscheme
-Plug 'altercation/vim-colors-solarized'
+    " colorschemes
+    Plug 'lifepillar/vim-solarized8'
+    Plug 'dracula/vim', { 'as': 'dracula' }
 
-" Git wrapper for vim
-Plug 'tpope/vim-fugitive'
+    " LaTeX
+    Plug 'lervag/vimtex'
 
-" Vim support for Julia
-Plug 'JuliaLang/julia-vim'
+    " auto completion
+    if has('nvim')
+      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
 
-" insert or delete brackets, parens, quotes
-Plug 'jiangmiao/auto-pairs'
+    " Track the engine.
+    Plug 'SirVer/ultisnips'
 
-" add all plugins before this line
-call plug#end()
+    " Snippets are separated from the engine. Add this if you want them:
+    Plug 'honza/vim-snippets'
 
-filetype plugin indent on
-syntax enable
+    " text
+    Plug 'junegunn/goyo.vim'
+    call plug#end()
 
-set background=dark
-" set t_Co=256
-" colorscheme industry
-" colorscheme solarized8
-colorscheme default
-
-" Vim has spellcheck
-" set spell
-" ]s [s
-" zg zw z= 1z=
-" .vim/spell/en.utf-8.add
-
-" Store the swp and backup files in a sparate directory
-" Dropbox is syncing hidden files also :-)
-" set dir=~/.vim/swap,/tmp,.
-" set bdir=~/.vim/backup,/tmp,.
-set nobackup
-set nowritebackup
-
-" List chars
-set list
-set listchars=""
-" set listchars=tab:»·
-set listchars=tab:▸\
-set listchars+=trail:·
-set listchars+=extends:>
-set listchars+=precedes:<
-set listchars+=nbsp:·
-set listchars+=eol:¬
-
-
-set backspace=indent,eol,start
+" Some basics:
+    set nocompatible
+    filetype plugin on
+    syntax on
+    set encoding=utf-8
+    set number
+    set relativenumber
+    set background=dark
+    colorscheme dracula
+    if has("gui_running")
+        set background=dark
+        "colorscheme solarized8_dark
+        colorscheme dracula
+    endif
 
 " Text , tab and Indentation Related
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set smarttab
+    set expandtab
+    set tabstop=4
+    set softtabstop=4
+    set shiftwidth=4
+    set smarttab
 
-set linebreak
-set textwidth=500
-set colorcolumn=80
+" List chars
+    " set list
+    "set listchars=""
+    "" set listchars=tab:»·
+    "" set listchars=tab:▸\
+    "set listchars+=trail:·
+    "set listchars+=extends:>
+    "set listchars+=precedes:<
+    "set listchars+=nbsp:·
+    "set listchars+=eol:¬
+    set list
+    if has('gui_running')
+        set listchars=tab:▶\ ,trail:·,extends:\#,eol:¬,nbsp:.
+    else
+        set listchars=tab:»·,trail:.,extends:\#,eol:¬,nbsp:.
+    endif
 
-" set autoindent
-" set smartindent
-set wrap            "Wrap Lines
+"  fonts
+    if has('gui_running')
+        " set guifont=Menlo\ Regular:h14
+        set guifont=Source\ Code\ Pro:h14
+    endif
 
-set number          " line numbers on
-set showmatch       " show matching brackets
+" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
+    set splitbelow
+    set splitright
+
+" Shortcutting split navigation, saving a keypress:
+    map <C-h> <C-w>h
+    map <C-j> <C-w>j
+    map <C-k> <C-w>k
+    map <C-l> <C-w>l
+
+" Open file as suckless sent presentation
+    "map <leader>s :!sent<space><C-r>% 2>/dev/null &<CR><CR>
+
+" View an image for a suckless sent presentation:
+    "map <leader>v $F@ly$:!feh --scale-down --auto-zoom --image-bg black <c-r>" &<CR><CR>
 
 
-set hlsearch        " highlight search
-set ignorecase      " do case insensitive matching
-set smartcase       " be sensitive when there's a capital letter
-set incsearch
+" Goyo plugin makes text more readable when writing prose:
+    map <F10> :Goyo<CR>
+    map <leader>f :Goyo \| set linebreak<CR>
+    inoremap <F10> <esc>:Goyo<CR>a
 
-" Abbreviations
-abbreviate #i #include
-abbreviate #d #define
 
-" use <C-b> to paste from system clipboard
-" <C-v> is already used in Vim to trigger Visual Block mode
-map <C-b> "+p
+" Enable autocompletion:
+    set wildmode=longest,list,full
+    set wildmenu
 
-" use <C-c> to copy to system clipboard
-" the text to copy should be selected using visual mode
-map <C-c> "+y
+" Automatically deletes all tralling whitespace on save.
+    autocmd BufWritePre * %s/\s\+$//e
 
-" disable error bell
-set noerrorbells visualbell t_vb=
-if has('autocmd')
-    autocmd GUIEnter * set visualbell t_vb=
-endif
+" When shortcut files are updated, renew bash and ranger configs with new material:
+    autocmd BufWritePost ~/.scripts/folders,~/.scripts/configs !bash ~/.scripts/shortcuts.sh
+
+" Runs a script that cleans out tex build files whenever I close out of a .tex file.
+    autocmd VimLeave *.tex !texclear
+
+" Disables automatic commenting on newline:
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" C-T for new tab
+    nnoremap <C-t> :tabnew<cr>
+
+
+" vimtex fix issue with  neovim
+    let g:vimtex_compiler_progname = 'nvr'
+    let g:python3_host_prog = '/Users/sivapvarma/.opt/anaconda3/bin/python3'
+
+" autocompletion
+    " use deoplete
+    let g:deoplete#enable_at_startup = 1
+
+" vimtex deoplete integration
+" This is new style
+    call deoplete#custom#var('omni', 'input_patterns', {
+          \ 'tex': g:vimtex#re#deoplete
+          \})
+
+
+    " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" working with Skim
+    if has('macunix')
+        let g:vimtex_view_general_viewer
+                    \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+    elseif has('unix')
+        let g:vimtex_view_general_viewer
+                    \ = 'zathura'
+    endif
+    let g:vimtex_view_general_options = '-r @line @pdf @tex'
+
+" This adds a callback hook that updates Skim after compilation
+    let g:vimtex_latexmk_callback_hooks = ['UpdateSkim']
+    function! UpdateSkim(status)
+        if !a:status | return | endif
+
+        let l:out = b:vimtex.out()
+        let l:tex = expand('%:p')
+        let l:cmd = [g:vimtex_view_general_viewer, '-r']
+        if !empty(system('pgrep Skim'))
+            call extend(l:cmd, ['-g'])
+        endif
+        if has('nvim')
+            call jobstart(l:cmd + [line('.'), l:out, l:tex])
+        elseif has('job')
+            call job_start(l:cmd + [line('.'), l:out, l:tex])
+        else
+            call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
+        endif
+    endfunction
