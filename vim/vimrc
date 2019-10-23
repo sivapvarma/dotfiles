@@ -144,10 +144,10 @@
           \})
 
 
-    " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-    let g:UltiSnipsExpandTrigger="<C-j>"
-    let g:UltiSnipsJumpForwardTrigger="<c-b>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe or deoplete or other autocompletion that uses tab.
+    let g:UltiSnipsExpandTrigger="<c-h>"
+    let g:UltiSnipsJumpForwardTrigger="<c-j>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " working with Skim
     if has('macunix')
