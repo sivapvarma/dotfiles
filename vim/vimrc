@@ -145,7 +145,7 @@
 
 
     " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsExpandTrigger="<C-j>"
     let g:UltiSnipsJumpForwardTrigger="<c-b>"
     let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
@@ -181,3 +181,7 @@
 
 " set textwidth to 80 for text, markdown and latex
     autocmd FileType text,markdown,tex setlocal textwidth=80
+
+" <TAB>: completion.
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    " inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
