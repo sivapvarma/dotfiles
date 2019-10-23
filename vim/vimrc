@@ -178,3 +178,6 @@
             call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
         endif
     endfunction
+
+" set textwidth to 80 for text, markdown and latex
+    autocmd FileType text,markdown,tex setlocal textwidth=80
