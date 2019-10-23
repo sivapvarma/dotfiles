@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     octave
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -49,6 +50,9 @@ values."
      spell-checking
      ;; syntax-checking
      ;; version-control
+     python
+     latex
+     emoji
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -126,8 +130,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(sanityinc-solarized-light
-                         sanityinc-solarized-dark
+   dotspacemacs-themes '(sanityinc-solarized-dark
+                         sanityinc-solarized-light
                          spacemacs-dark
                          spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -302,6 +306,10 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+
+  ;; macOS use apple unicode fonts for emoji
+  ;; link: see - https://github.com/syl20bnr/spacemacs/issues/6654
+  (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
   )
 
 (defun dotspacemacs/user-config ()
@@ -316,7 +324,40 @@ you should place your code here."
   (setq powerline-image-apple-rgb t)
   ;; use powerline default separators, they are very clean and sharp
   (setq powerline-default-separator 'nil)
+  ;; cdlatex minor mode for org-mode for fast insertion of math and latex
+  ;; (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+
+  ;; Activate column indicator in prog-mode and text-mode
+  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+  (add-hook 'text-mode-hook 'turn-on-fci-mode)
+
+  (add-hook 'text-mod-hook 'visual-fill-column)
+
+  ;; add line breaks near full column automatically
+  (add-hook 'org-mode-hook #'auto-fill-mode)
+
+  ;; display emoji's using emojify-mode
+  (add-hook 'after-init-hook #'global-emojify-mode)
+  ;; display emoji's using unicode characters - apple has the best emoji fonts
+  (setq emojify-display-style 'unicode)
+
+  ;; running emacs server
+  (evil-leader/set-key "q q" 'spacemacs/frame-killer)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (emojify emoji-cheat-sheet-plus company-emoji visual-fill-column auctex-latexmk writeroom-mode yapfify xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diminish define-word cython-mode company-statistics company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-solarized clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
