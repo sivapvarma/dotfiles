@@ -1,0 +1,9 @@
+[user]
+	name = Shiva Prasad Varma
+	email = sivapvarma@gmail.com
+[core]
+	editor = nvim
+[github]
+	user = sivapvarma
+[push]
+	default = simple
